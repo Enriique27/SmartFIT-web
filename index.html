@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Intermodular EnqiXu, Iker Sierra, David Díaz</title>
+</head>
+<style>
+/* ===== ESTILOS GENERALES DE LA PAGINA ===== */
+body {
+    margin: 0; /* Quitamos el margen por defecto del navegador */
+    font-family: Arial, sans-serif; /* Fuente simple y facil de leer */
+    background-color: #f2f2f2; /* Fondo gris claro para toda la web */
+}
+
+/* ===== CABECERA PRINCIPAL ===== */
+header {
+    background-color: #2e8b57; /* Fondo verde del encabezado */
+    color: white; /* Texto blanco */
+    text-align: center; /* Texto centrado */
+    padding: 15px; /* Espacio interno */
+}
+
+/* ===== MENU DE NAVEGACION ===== */
+.menu {
+    background-color: #1f6b42; /* Verde mas oscuro para diferenciar el menu */
+    text-align: center;
+    padding: 10px;
+}
+
+.menu a {
+    color: white; /* Color de los enlaces */
+    text-decoration: none; /* Quitamos subrayado */
+    margin: 8px; /* Separacion entre enlaces */
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+main {
+    width: 90%; /* Ancho general del contenido */
+    margin: 20px auto; /* Centrado horizontal */
+}
+
+/* Cajas de seccion: calculadora, sostenibilidad y contacto */
+.caja-principal,
+.sostenibilidad,
+.contacto {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* ===== FORMULARIO DE EJERCICIO ===== */
+#formulario-ejercicio label,
+#formulario-ejercicio select,
+#formulario-ejercicio input,
+#formulario-ejercicio button {
+    display: block; /* Cada elemento en una linea */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    margin-bottom: 10px; /* Espacio entre campos */
+}
+
+#formulario-ejercicio select,
+#formulario-ejercicio input,
+#formulario-ejercicio button {
+    padding: 8px; /* Espacio interno para mejor lectura */
+}
+
+/* Boton principal de calcular */
+#boton-calcular {
+    background-color: #2e8b57;
+    color: white;
+    border: none; /* Quitamos borde por defecto */
+}
+
+/* Caja donde aparece el resultado de calorias */
+#resultado {
+    background-color: #eef7f0;
+    border: 1px solid #c8decf;
+    padding: 10px;
+}
+
+/* ===== PIE DE PAGINA ===== */
+footer {
+    background-color: #1f6b42;
+    color: white;
+    text-align: center;
+    padding: 12px;
+}
+
+</style>
+<body>
+    <header>
+        <h1>EcoGym</h1>
+        <p>Entrena mejor y cuida el planeta</p>
+    </header>
+
+    <nav class="menu">
+        <a href="#calculadora">Calculadora</a>
+        <a href="#sostenibilidad">Sostenibilidad</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <main>
+        <section id="calculadora" class="caja-principal">
+            <h2>Calcula tu entrenamiento</h2>
+            <p>Selecciona el ejercicio y los minutos para estimar las calorías.</p>
+
+            <form id="formulario-ejercicio">
+                <label for="ejercicio">Elige un ejercicio:</label>
+                <select id="ejercicio">
+                    <option value="bicicleta">Bicicleta</option>
+                    <option value="correr">Correr</option>
+                    <option value="pesas">Pesas</option>
+
+                </select>
+
+                <label for="minutos">Minutos de entrenamiento:</label>
+                <input type="number" id="minutos" min="1" placeholder="Ejemplo: 30">
+
+                <button type="button" id="boton-calcular">Calcular calorías</button>
+            </form>
+
+            <div id="resultado">
+                <p>Aquí aparecerá el resultado.</p>
+            </div>
+        </section>
+
+        <section id="sostenibilidad" class="sostenibilidad">
+            <h2>Sostenibilidad</h2>
+            <p>En EcoGym promovemos hábitos saludables y responsables con el medio ambiente.</p>
+            <ul>
+                <li>Duchas cortas después del entrenamiento para ahorrar agua.</li>
+                <li>Uso de botella reutilizable en lugar de plástico de un solo uso.</li>
+                <li>Apagar luces y máquinas cuando no se estén usando.</li>
+            </ul>
+        </section>
+
+        <section id="contacto" class="contacto">
+            <h2>Contacto del gimnasio</h2>
+            <p>Email: info@SmartFit.es</p>
+            <p>Teléfono: 600 123 456</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Proyecto Intermodular EnqiXu, Iker Sierra, David Díaz</p>
+    </footer>
+
+    <script>
+       'Javascript para calcular calorias'
+
+// Guardamos el boton en una variable para usarlo despues
+var boton = document.getElementById("boton-calcular");
+
+// Cuando el usuario hace clic en el boton, ejecutamos esta funcion
+boton.onclick = function () {
+    // Leemos los datos que el usuario ha escrito o seleccionado
+    var tipo = document.getElementById("ejercicio").value;
+    var minutos = Number(document.getElementById("minutos").value);
+
+    // Seleccionamos la caja donde vamos a mostrar el resultado
+    var resultado = document.getElementById("resultado");
+
+    // Variable donde guardaremos el total de calorias
+    var calorias = 0;
+
+    // Validacion simple: los minutos deben ser mayores que 0
+    if (minutos <= 0) {
+        resultado.innerHTML = "<p>Introduce minutos validos.</p>";
+        return; // Salimos de la funcion si el dato no es correcto
+    }
+
+    // Calculamos calorias segun el tipo de ejercicio
+    if (tipo == "bicicleta") {
+        calorias = minutos * 8;
+    } else if (tipo == "correr") {
+        calorias = minutos * 10;
+    } else if (tipo == "pesas") {
+        calorias = minutos * 6;
+    }
+
+    // Mostramos el resultado final en pantalla
+    resultado.innerHTML = "<p>Has quemado aprox. <strong>" + calorias + " calorias</strong>.</p>" +
+        "<p>Consejo sostenible: ducha de 5 minutos o menos.</p>";
+};
+
+    </script>
+</body>
+</html>
